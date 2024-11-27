@@ -1,59 +1,90 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
   background-color: #faf8ef;
+  padding: 20px;
 }
 
 .container {
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .game-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  gap: 10px;
 }
 
 h1 {
+  font-size: clamp(24px, 8vw, 48px);
   color: #776e65;
-  margin: 0;
 }
 
 .score-container {
-  background-color: #bbada0;
-  color: white;
-  padding: 10px;
+  background: #bbada0;
+  padding: clamp(8px, 2vw, 15px);
   border-radius: 5px;
+  text-align: center;
+  min-width: 80px;
+}
+
+.score-label {
+  color: #eee4da;
+  font-size: clamp(12px, 3vw, 16px);
+  font-weight: bold;
+}
+
+#score {
+  color: white;
+  font-size: clamp(16px, 4vw, 24px);
+  font-weight: bold;
 }
 
 #new-game-btn {
-  background-color: #8f7a66;
+  background: #8f7a66;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: clamp(8px, 2vw, 15px) clamp(12px, 3vw, 20px);
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: clamp(14px, 3.5vw, 18px);
 }
 
 #new-game-btn:hover {
-  background-color: #9f8a76;
+  background: #7f6a56;
 }
 
 .game-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  gap: 2%;
   background-color: #bbada0;
   border-radius: 5px;
-  padding: 15px;
-  width: 500px;
-  height: 500px;
+  padding: 2%;
+  width: 100%;
+  aspect-ratio: 1;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .tile {
@@ -62,10 +93,11 @@ h1 {
   align-items: center;
   background-color: #cdc1b4;
   border-radius: 5px;
-  font-size: 40px;
+  font-size: clamp(20px, 6vw, 36px);
   font-weight: bold;
   color: #776e65;
-  transition: all 0.2s ease-in-out;
+  aspect-ratio: 1;
+  transition: transform 0.15s ease-in-out;
 }
 
 .tile-2 {
@@ -93,25 +125,25 @@ h1 {
 .tile-128 {
   background-color: #edcf72;
   color: white;
-  font-size: 35px;
+  font-size: clamp(18px, 5.5vw, 32px);
 }
 .tile-256 {
   background-color: #edcc61;
   color: white;
-  font-size: 35px;
+  font-size: clamp(18px, 5.5vw, 32px);
 }
 .tile-512 {
   background-color: #edc850;
   color: white;
-  font-size: 35px;
+  font-size: clamp(18px, 5.5vw, 32px);
 }
 .tile-1024 {
   background-color: #edc53f;
   color: white;
-  font-size: 30px;
+  font-size: clamp(16px, 5vw, 28px);
 }
 .tile-2048 {
   background-color: #edc22e;
   color: white;
-  font-size: 30px;
+  font-size: clamp(16px, 5vw, 28px);
 }

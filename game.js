@@ -10,6 +10,15 @@ class Game2048 {
     this.newGameBtn.addEventListener("click", () => this.initGame());
     document.addEventListener("keydown", this.handleKeyPress.bind(this));
 
+    // Add touch event listeners
+    this.gameBoard.addEventListener(
+      "touchstart",
+      this.handleTouchStart.bind(this)
+    );
+    this.gameBoard.addEventListener("touchend", this.handleTouchEnd.bind(this));
+    this.touchStartX = null;
+    this.touchStartY = null;
+
     this.initGame();
   }
 
@@ -204,6 +213,56 @@ class Game2048 {
       }
     }
     return false;
+  }
+
+  handleTouchStart(event) {
+    event.preventDefault();
+    const touch = event.touches[0];
+    this.touchStartX = touch.clientX;
+    this.touchStartY = touch.clientY;
+  }
+
+  handleTouchEnd(event) {
+    event.preventDefault();
+    if (!this.touchStartX || !this.touchStartY) return;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - this.touchStartX;
+    const deltaY = touch.clientY - this.touchStartY;
+
+    // Reset touch coordinates
+    this.touchStartX = null;
+    this.touchStartY = null;
+
+    // Minimum swipe distance to trigger a move
+    const minSwipeDistance = 30;
+
+    let moved = false;
+
+    // Determine swipe direction based on which delta is larger
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (Math.abs(deltaX) > minSwipeDistance) {
+        if (deltaX > 0) {
+          moved = this.moveRight();
+        } else {
+          moved = this.moveLeft();
+        }
+      }
+    } else {
+      if (Math.abs(deltaY) > minSwipeDistance) {
+        if (deltaY > 0) {
+          moved = this.moveDown();
+        } else {
+          moved = this.moveUp();
+        }
+      }
+    }
+
+    if (moved) {
+      this.generateTile();
+      this.renderBoard();
+      this.checkGameStatus();
+    }
   }
 }
 
