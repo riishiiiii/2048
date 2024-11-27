@@ -6,6 +6,9 @@ class Game2048 {
     this.gameBoard = document.getElementById("game-board");
     this.scoreDisplay = document.getElementById("score");
     this.newGameBtn = document.getElementById("new-game-btn");
+    this.themeBtn = document.getElementById("theme-btn");
+    this.themeSelector = document.querySelector(".theme-selector");
+    this.currentTheme = "classic";
 
     this.newGameBtn.addEventListener("click", () => this.initGame());
     document.addEventListener("keydown", this.handleKeyPress.bind(this));
@@ -18,6 +21,33 @@ class Game2048 {
     this.gameBoard.addEventListener("touchend", this.handleTouchEnd.bind(this));
     this.touchStartX = null;
     this.touchStartY = null;
+
+    // Add theme switching functionality
+    this.themeBtn.addEventListener("click", () => {
+      this.themeSelector.classList.toggle("active");
+    });
+
+    // Close theme dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!this.themeSelector.contains(e.target)) {
+        this.themeSelector.classList.remove("active");
+      }
+    });
+
+    // Handle theme selection
+    document.querySelectorAll(".theme-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        const theme = option.dataset.theme;
+        this.setTheme(theme);
+        this.themeSelector.classList.remove("active");
+      });
+    });
+
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem("2048-theme");
+    if (savedTheme) {
+      this.setTheme(savedTheme);
+    }
 
     this.initGame();
   }
@@ -263,6 +293,23 @@ class Game2048 {
       this.renderBoard();
       this.checkGameStatus();
     }
+  }
+
+  setTheme(theme) {
+    // Remove previous theme
+    document.body.removeAttribute("data-theme");
+    
+    // Set new theme
+    if (theme !== "classic") {
+      document.body.setAttribute("data-theme", theme);
+    }
+    
+    // Update button text
+    this.themeBtn.textContent = `Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`;
+    
+    // Save theme preference
+    localStorage.setItem("2048-theme", theme);
+    this.currentTheme = theme;
   }
 }
 

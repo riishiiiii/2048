@@ -10,7 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #faf8ef;
+  background-color: var(--bg-color);
   padding: 20px;
 }
 
@@ -31,11 +31,11 @@ body {
 
 h1 {
   font-size: clamp(24px, 8vw, 48px);
-  color: #776e65;
+  color: var(--text-color);
 }
 
 .score-container {
-  background: #bbada0;
+  background: var(--board-color);
   padding: clamp(8px, 2vw, 15px);
   border-radius: 5px;
   text-align: center;
@@ -55,8 +55,8 @@ h1 {
 }
 
 #new-game-btn {
-  background: #8f7a66;
-  color: white;
+  background: var(--button-color);
+  color: var(--button-text);
   border: none;
   padding: clamp(8px, 2vw, 15px) clamp(12px, 3vw, 20px);
   border-radius: 5px;
@@ -66,14 +66,14 @@ h1 {
 }
 
 #new-game-btn:hover {
-  background: #7f6a56;
+  filter: brightness(90%);
 }
 
 .game-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2%;
-  background-color: #bbada0;
+  background-color: var(--board-color);
   border-radius: 5px;
   padding: 2%;
   width: 100%;
@@ -91,59 +91,200 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #cdc1b4;
+  background-color: var(--tile-color);
   border-radius: 5px;
   font-size: clamp(20px, 6vw, 36px);
   font-weight: bold;
-  color: #776e65;
+  color: var(--text-color);
   aspect-ratio: 1;
   transition: transform 0.15s ease-in-out;
 }
 
 .tile-2 {
-  background-color: #eee4da;
+  background-color: var(--tile-2);
 }
+
 .tile-4 {
-  background-color: #ede0c8;
+  background-color: var(--tile-4);
 }
+
 .tile-8 {
-  background-color: #f2b179;
-  color: white;
+  background-color: var(--tile-8);
+  color: var(--button-text);
 }
+
 .tile-16 {
-  background-color: #f59563;
-  color: white;
+  background-color: var(--tile-16);
+  color: var(--button-text);
 }
+
 .tile-32 {
-  background-color: #f67c5f;
-  color: white;
+  background-color: var(--tile-32);
+  color: var(--button-text);
 }
+
 .tile-64 {
-  background-color: #f65e3b;
-  color: white;
+  background-color: var(--tile-64);
+  color: var(--button-text);
 }
+
 .tile-128 {
-  background-color: #edcf72;
-  color: white;
+  background-color: var(--tile-128);
+  color: var(--button-text);
   font-size: clamp(18px, 5.5vw, 32px);
 }
+
 .tile-256 {
-  background-color: #edcc61;
-  color: white;
+  background-color: var(--tile-256);
+  color: var(--button-text);
   font-size: clamp(18px, 5.5vw, 32px);
 }
+
 .tile-512 {
-  background-color: #edc850;
-  color: white;
+  background-color: var(--tile-512);
+  color: var(--button-text);
   font-size: clamp(18px, 5.5vw, 32px);
 }
+
 .tile-1024 {
-  background-color: #edc53f;
-  color: white;
+  background-color: var(--tile-1024);
+  color: var(--button-text);
   font-size: clamp(16px, 5vw, 28px);
 }
+
 .tile-2048 {
-  background-color: #edc22e;
-  color: white;
+  background-color: var(--tile-2048);
+  color: var(--button-text);
   font-size: clamp(16px, 5vw, 28px);
+}
+
+/* Theme Selector Styles */
+.theme-selector {
+  position: relative;
+}
+
+#theme-btn {
+  background: var(--button-color);
+  color: var(--button-text);
+  border: none;
+  padding: clamp(8px, 2vw, 15px) clamp(12px, 3vw, 20px);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: clamp(14px, 3.5vw, 18px);
+}
+
+#theme-btn:hover {
+  filter: brightness(90%);
+}
+
+.theme-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  margin-top: 5px;
+  min-width: 150px;
+}
+
+.theme-selector.active .theme-dropdown {
+  display: block;
+}
+
+.theme-option {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.theme-option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Theme: Classic (default) */
+:root {
+  --bg-color: #faf8ef;
+  --board-color: #bbada0;
+  --text-color: #776e65;
+  --tile-color: #cdc1b4;
+  --button-color: #8f7a66;
+  --button-text: white;
+  --tile-2: #eee4da;
+  --tile-4: #ede0c8;
+  --tile-8: #f2b179;
+  --tile-16: #f59563;
+  --tile-32: #f67c5f;
+  --tile-64: #f65e3b;
+  --tile-128: #edcf72;
+  --tile-256: #edcc61;
+  --tile-512: #edc850;
+  --tile-1024: #edc53f;
+  --tile-2048: #edc22e;
+}
+
+/* Theme: Dark Mode */
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --board-color: #2d2d2d;
+  --text-color: #ffffff;
+  --tile-color: #3d3d3d;
+  --button-color: #4a4a4a;
+  --button-text: #ffffff;
+  --tile-2: #424242;
+  --tile-4: #4f4f4f;
+  --tile-8: #5c5c5c;
+  --tile-16: #696969;
+  --tile-32: #767676;
+  --tile-64: #838383;
+  --tile-128: #909090;
+  --tile-256: #9d9d9d;
+  --tile-512: #aaaaaa;
+  --tile-1024: #b7b7b7;
+  --tile-2048: #c4c4c4;
+}
+
+/* Theme: Neon */
+[data-theme="neon"] {
+  --bg-color: #1a1a2e;
+  --board-color: #16213e;
+  --text-color: #00ff00;
+  --tile-color: #0f3460;
+  --button-color: #e94560;
+  --button-text: #ffffff;
+  --tile-2: #0d7377;
+  --tile-4: #14ffec;
+  --tile-8: #ff2e63;
+  --tile-16: #ff0055;
+  --tile-32: #8338ec;
+  --tile-64: #3a86ff;
+  --tile-128: #00ff00;
+  --tile-256: #ff00ff;
+  --tile-512: #00ffff;
+  --tile-1024: #ffff00;
+  --tile-2048: #ff0000;
+}
+
+/* Theme: Pastel */
+[data-theme="pastel"] {
+  --bg-color: #f0f4f8;
+  --board-color: #d8e2dc;
+  --text-color: #6d6875;
+  --tile-color: #e8e8e4;
+  --button-color: #9d8189;
+  --button-text: #ffffff;
+  --tile-2: #ffd7ba;
+  --tile-4: #fec5bb;
+  --tile-8: #fec89a;
+  --tile-16: #f9dcc4;
+  --tile-32: #ffb4a2;
+  --tile-64: #e5989b;
+  --tile-128: #b5838d;
+  --tile-256: #8a7090;
+  --tile-512: #6d6875;
+  --tile-1024: #5c5863;
+  --tile-2048: #4a4651;
 }
