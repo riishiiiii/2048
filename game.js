@@ -9,6 +9,7 @@ class Game2048 {
     this.themeBtn = document.getElementById("theme-btn");
     this.themeSelector = document.querySelector(".theme-selector");
     this.currentTheme = "classic";
+    this.instructionsElement = document.getElementById("game-instructions");
 
     this.newGameBtn.addEventListener("click", () => this.initGame());
     document.addEventListener("keydown", this.handleKeyPress.bind(this));
@@ -48,6 +49,8 @@ class Game2048 {
     if (savedTheme) {
       this.setTheme(savedTheme);
     }
+
+    this.updateInstructions();
 
     this.initGame();
   }
@@ -293,6 +296,14 @@ class Game2048 {
       this.renderBoard();
       this.checkGameStatus();
     }
+  }
+
+  updateInstructions() {
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const instructions = isTouchDevice
+      ? "Swipe up, down, left, or right to move tiles"
+      : "Use arrow keys to move tiles";
+    this.instructionsElement.textContent = instructions;
   }
 
   setTheme(theme) {
